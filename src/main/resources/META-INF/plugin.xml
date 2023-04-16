@@ -1,0 +1,30 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>eu.oakroot.mcname</id>
+    <name>Tab File Full Path</name>
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="bartosz.grzesiak@oakroot.eu" url="">OAK ROOT</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description>This plugin was made only for one purpose: My friend MC need this :)</description>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <editorTabTitleProvider implementation="eu.oakroot.mcname.McTabTitleProvider"/>
+    </extensions>
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <actions>
+        <action class="eu.oakroot.mcname.McPath" id="eu.oakroot.mcname.McPath"
+                description="Show full path" text="Tab File Full Path">
+            <override-text place="MainMenu" text="Show Full Path"/>
+            <keyboard-shortcut first-keystroke="ctrl shift p" keymap="$default"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last" />
+        </action>
+    </actions>
+</idea-plugin>

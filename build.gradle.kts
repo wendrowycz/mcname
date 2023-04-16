@@ -1,0 +1,91 @@
+import org.jetbrains.changelog.Changelog
+import org.jetbrains.changelog.markdownToHTML
+
+plugins {
+    id("java")
+    id("org.jetbrains.kotlin.jvm") version "1.8.20"
+    id("org.jetbrains.intellij") version "1.13.3"
+    id("org.jetbrains.changelog") version "2.0.0"
+}
+
+var plVer = "1.0.0"
+
+"eu.oakroot".also { group = it }
+plVer.also { version = it }
+
+repositories {
+    mavenCentral()
+}
+
+// Configure Gradle IntelliJ Plugin
+// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
+intellij {
+    version.set("2023.1")
+    type.set("GO") // Target IDE Platform
+
+    plugins.set(listOf(/* Plugin Dependencies */))
+}
+
+tasks {
+    // Set the JVM compatibility versions
+    withType<JavaCompile> {
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
+    }
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions.jvmTarget = "17"
+    }
+
+    patchPluginXml {
+        sinceBuild.set("231")
+        untilBuild.set("241.*")
+    }
+
+    signPlugin {
+        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
+        privateKey.set(System.getenv("PRIVATE_KEY"))
+        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+    }
+
+    publishPlugin {
+        token.set(System.getenv("PUBLISH_TOKEN"))
+    }
+
+    patchPluginXml {
+        version.set(plVer)
+        pluginDescription.set(
+            projectDir.resolve("README.md").readText().lines().run {
+                val start = "<!-- Plugin description -->"
+                val end = "<!-- Plugin description end -->"
+
+                if (!containsAll(listOf(start, end))) {
+                    throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+                }
+                subList(indexOf(start) + 1, indexOf(end))
+            }.joinToString { "\n" }.run { markdownToHTML(this) }
+        )
+        changeNotes.set(renderItems())
+    }
+}
+
+fun renderItems(): String {
+    var items = ""
+    changelog.getAll().forEach {(_,u) ->
+        if (!u.isUnreleased) {
+            items += changelog.renderItem(
+                u.withHeader(true)
+                    .withEmptySections(false)
+                    .withLinks(true),
+                Changelog.OutputType.HTML
+            )
+        }
+    }
+
+    return items
+}
+
+changelog {
+    version.set(plVer)
+    groups.set(emptyList())
+    repositoryUrl.set("https://github.com/wendrowycz/mcname")
+}
