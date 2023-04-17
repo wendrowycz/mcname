@@ -22,7 +22,6 @@ repositories {
 intellij {
     version.set("2023.1")
     type.set("GO") // Target IDE Platform
-
     plugins.set(listOf(/* Plugin Dependencies */))
 }
 
@@ -36,11 +35,6 @@ tasks {
         kotlinOptions.jvmTarget = "17"
     }
 
-    patchPluginXml {
-        sinceBuild.set("231")
-        untilBuild.set("241.*")
-    }
-
     signPlugin {
         certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
         privateKey.set(System.getenv("PRIVATE_KEY"))
@@ -52,6 +46,8 @@ tasks {
     }
 
     patchPluginXml {
+        sinceBuild.set("231")
+        untilBuild.set("241.*")
         version.set(plVer)
         pluginDescription.set(
             projectDir.resolve("README.md").readText().lines().run {
@@ -62,10 +58,13 @@ tasks {
                     throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
                 }
                 subList(indexOf(start) + 1, indexOf(end))
-            }.joinToString { "\n" }.run { markdownToHTML(this) }
+            }.joinToString("\n").run { markdownToHTML(this) }
         )
+
         changeNotes.set(renderItems())
     }
+
+    renderItems()
 }
 
 fun renderItems(): String {
