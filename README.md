@@ -1,7 +1,9 @@
 # MC Path
 <!-- Plugin description -->
-This plugin was made only for one purpose: My friend MC need this :)
+This tool acts as a toggle and allows you to enable or disable the full path to the file displayed as the title of the tab.
 <!-- Plugin description end -->
+
+This plugin was made only for one purpose: My friend MC need this :)
 
 ## Installation
 1. Inside your IDE, select Preferences -> Plugins.
