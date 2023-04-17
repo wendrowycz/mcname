@@ -24,6 +24,9 @@ open class McPath : AnAction(){
 
     override fun update(e: AnActionEvent) {
         super.update(e)
+        val project: Project = e.project ?: return
+        val propertiesComponent = PropertiesComponent.getInstance(project)
+        mcFullPath = propertiesComponent.getBoolean(McSettings.MC_PATH_FLAG_KEY)
         e.presentation.isEnabledAndVisible = true
         e.presentation.text = if (mcFullPath) "Hide Full Path" else "Show Full Path"
     }

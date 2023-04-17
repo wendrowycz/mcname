@@ -12,6 +12,7 @@
     <description>This plugin was made only for one purpose: My friend MC need this :)</description>
 
     <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="eu.oakroot.mcname.McStartup"/>
         <editorTabTitleProvider implementation="eu.oakroot.mcname.McTabTitleProvider"/>
     </extensions>
     <!-- Product and plugin compatibility requirements.
