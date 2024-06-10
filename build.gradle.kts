@@ -3,12 +3,12 @@ import org.jetbrains.changelog.markdownToHTML
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.8.20"
-    id("org.jetbrains.intellij") version "1.13.3"
-    id("org.jetbrains.changelog") version "2.0.0"
+    id("org.jetbrains.kotlin.jvm") version "2.0.0"
+    id("org.jetbrains.intellij") version "1.16.0"
+    id("org.jetbrains.changelog") version "2.2.0"
 }
 
-var plVer = "1.0.0"
+var plVer = "1.1.0"
 
 "eu.oakroot".also { group = it }
 plVer.also { version = it }
@@ -20,7 +20,7 @@ repositories {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2023.1")
+    version.set("2024.1")
     type.set("GO") // Target IDE Platform
     plugins.set(listOf(/* Plugin Dependencies */))
 }
@@ -46,8 +46,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("231")
-        untilBuild.set("241.*")
+        sinceBuild.set("241")
+        untilBuild.set("251.*")
         version.set(plVer)
         pluginDescription.set(
             projectDir.resolve("README.md").readText().lines().run {
