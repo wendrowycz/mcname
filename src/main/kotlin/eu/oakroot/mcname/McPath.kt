@@ -7,7 +7,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
 
-open class McPath : AnAction(){
+open class McPath : AnAction() {
     private var mcFullPath = false
 
     override fun actionPerformed(e: AnActionEvent) {
@@ -34,5 +34,4 @@ open class McPath : AnAction(){
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.BGT
     }
-
 }

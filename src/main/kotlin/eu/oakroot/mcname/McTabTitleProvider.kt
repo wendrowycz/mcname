@@ -6,9 +6,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import java.io.File
 
-object McSettings {
-    const val MC_PATH_FLAG_KEY = "mcPath.mcFullPath"
-}
 class McTabTitleProvider : EditorTabTitleProvider {
     private var mcFullPath = false
     override fun getEditorTabTitle(project: Project, file: VirtualFile): String {
