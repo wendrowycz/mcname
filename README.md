@@ -19,5 +19,5 @@ You can run formatting manually from contextual menu:
 From tools menu:
 ![!menu](./docs/menu.gif)
 
-Or using keyboard shortcut <kbd>Ctrl Shift L</kbd> on PC and <kbd>⌘ ⇧ L</kbd> on Mac
+Or using keyboard shortcut <kbd>Ctrl Shift P</kbd> on PC and <kbd>⌘ ⇧ P</kbd> on Mac
 ![!shortcut](./docs/shortcut.gif)
